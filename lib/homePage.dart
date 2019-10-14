@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sort_algorithm/sort/sortPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_sort_algorithm/model/item_data.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -25,26 +29,39 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomeListPage extends State<MyHomePage> {
   List _names = ["冒泡算法", "插入算法"];
+  List<ItemData> _namess = List();
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
+  _initData() async {
+    String data = await DefaultAssetBundle.of(context)
+        .loadString("static/file/load_data.json");
+    List<dynamic> resultData = json.decode(data);
+    print(resultData.toString());
+    _namess = getItemDataList(resultData);
+    print(_namess.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: _childListItem(),
-      ),
+      body: ListView(children: _childListItem()),
     );
   }
 
   List<Widget> _childListItem() {
     List<Widget> _widgets = List();
-    for (int i = 0; i < _names.length; i++) {
+    for (int i = 0; i < _namess.length; i++) {
       _widgets.add(Column(children: [
         ListTile(
-            title: Text(_names[i]),
+            title: Text(_namess[i].name),
             trailing: Icon(Icons.keyboard_arrow_right),
             onTap: () => _clickItem(i)),
         Divider(
@@ -57,6 +74,11 @@ class _MyHomeListPage extends State<MyHomePage> {
   }
 
   void _clickItem(int index) {
-    Fluttertoast.showToast(msg: _names[index]);
+    Fluttertoast.showToast(msg: _namess[index].name);
+    Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+        (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+      return SortPage(title: _namess[index].name);
+    }));
   }
 }

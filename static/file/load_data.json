@@ -1,0 +1,12 @@
+[
+    {"name": "冒泡排序","type": "bubble", "sortData": [5,4,2,1,8,3,19,17]},
+    {"name": "选择排序","type": "selection", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "插入排序","type": "insertion", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "希尔排序","type": "shell", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "归并排序","type": "merge", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "快速排序","type": "quick", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "堆排序","type": "heap", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "计数排序","type": "counting", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "桶排序","type": "bucket", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "基数排序","type": "radix", "sortData": [5,4,2,1,8,3,19,7]}
+]
