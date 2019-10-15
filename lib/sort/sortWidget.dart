@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 abstract class SortAlgorithm {
   List sort(List list);
 
@@ -91,10 +93,10 @@ class InsertionSort implements SortAlgorithm {
       int temp = list[i];
       int j = i;
       while (j > 0 && temp < list[j - 1]) {
-        list[j] = list[j-1];
+        list[j] = list[j - 1];
         j--;
       }
-      if(j != i){
+      if (j != i) {
         list[j] = temp;
       }
     }
@@ -103,14 +105,25 @@ class InsertionSort implements SortAlgorithm {
 }
 
 /**
- * 希尔排序
+ * 希尔排序 先分组再执行插入排序
  */
 class ShellSort implements SortAlgorithm {
   @override
   List sort(List list) {
-
-
-
+    for (int gap = (list.length / 2).toInt(); gap > 0; gap = (gap / 2).toInt()) {
+      print(gap);
+      for (int i = gap; i < list.length; i++) {
+        int temp = list[i];
+        int j = i;
+        while (j > 0 && temp < list[j - gap]) {
+          list[j] = list[j - gap];
+          j -= gap;
+        }
+        if (j != i) {
+          list[j] = temp;
+        }
+      }
+    }
     return list;
   }
 }
