@@ -20,15 +20,11 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
-//  @override
-//  _MyHomePageState createState() => _MyHomePageState();
-
   @override
   _MyHomeListPage createState() => _MyHomeListPage();
 }
 
 class _MyHomeListPage extends State<MyHomePage> {
-  List _names = ["冒泡算法", "插入算法"];
   List<ItemData> _namess = List();
 
   @override
@@ -42,8 +38,9 @@ class _MyHomeListPage extends State<MyHomePage> {
         .loadString("static/file/load_data.json");
     List<dynamic> resultData = json.decode(data);
     print(resultData.toString());
-    _namess = getItemDataList(resultData);
-    print(_namess.toString());
+    setState(() {
+      _namess = getItemDataList(resultData);
+    });
   }
 
   @override
