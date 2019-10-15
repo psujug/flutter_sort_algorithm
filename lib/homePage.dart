@@ -75,7 +75,7 @@ class _MyHomeListPage extends State<MyHomePage> {
     Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
         (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
-      return SortPage(title: _namess[index].name);
+      return SortPage(data: _namess[index]);
     }));
   }
 }

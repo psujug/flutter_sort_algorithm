@@ -1,6 +1,5 @@
-
-abstract class SortAlgorithm{
-  List sort(List);
+abstract class SortAlgorithm {
+  List sort(List list);
 
   factory SortAlgorithm(String type) {
     switch (type) {
@@ -40,31 +39,79 @@ abstract class SortAlgorithm{
   }
 }
 
+/**
+ * 冒泡排序
+ */
 class BubbleSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    for (int i = 0; i < list.length; i++) {
+      for (int j = i + 1; j < list.length; j++) {
+        if (list[i] > list[j]) {
+          int temp = list[i];
+          list[i] = list[j];
+          list[j] = temp;
+        }
+      }
+    }
+    return list;
   }
 }
 
-class InsertionSort implements SortAlgorithm {
-  @override
-  List sort(List) {
-    return null;
-  }
-}
-
+/**
+ * 选择排序
+ */
 class SelectionSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    for (int i = 0; i < list.length; i++) {
+      int min = i;
+      for (int j = i + 1; j < list.length; j++) {
+        if (list[min] > list[j]) {
+          min = j;
+        }
+      }
+      if (i != min) {
+        int temp = list[i];
+        list[i] = list[min];
+        list[min] = temp;
+      }
+    }
+    return list;
   }
 }
 
+/**
+ * 插入排序
+ */
+class InsertionSort implements SortAlgorithm {
+  @override
+  List sort(List list) {
+    for (int i = 1; i < list.length; i++) {
+      int temp = list[i];
+      int j = i;
+      while (j > 0 && temp < list[j - 1]) {
+        list[j] = list[j-1];
+        j--;
+      }
+      if(j != i){
+        list[j] = temp;
+      }
+    }
+    return list;
+  }
+}
+
+/**
+ * 希尔排序
+ */
 class ShellSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+
+
+
+    return list;
   }
 }
 
