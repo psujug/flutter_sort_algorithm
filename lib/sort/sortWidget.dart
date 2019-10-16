@@ -111,16 +111,17 @@ class ShellSort implements SortAlgorithm {
   @override
   List sort(List list) {
     for (int gap = (list.length / 2).toInt(); gap > 0; gap = (gap / 2).toInt()) {
-      print(gap);
       for (int i = gap; i < list.length; i++) {
         int temp = list[i];
         int j = i;
-        while (j > 0 && temp < list[j - gap]) {
+        while (j >= 0 && j-gap >=0 && temp < list[j - gap]) {
           list[j] = list[j - gap];
+          print(list.toString());
           j -= gap;
         }
         if (j != i) {
           list[j] = temp;
+          print(list.toString());
         }
       }
     }
@@ -128,10 +129,16 @@ class ShellSort implements SortAlgorithm {
   }
 }
 
+/**
+ * 归并排序
+ */
 class MergeSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    for(int i=0;i<list.length;i++){
+
+    }
+    return list;
   }
 }
 

@@ -35,7 +35,7 @@ class _MyHomeListPage extends State<MyHomePage> {
 
   _initData() async {
     String data = await DefaultAssetBundle.of(context)
-        .loadString("static/file/load_data.json");
+        .loadString("static/file/load_data.json",cache: false);
     List<dynamic> resultData = json.decode(data);
     print(resultData.toString());
     setState(() {
