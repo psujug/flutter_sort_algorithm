@@ -110,13 +110,14 @@ class InsertionSort implements SortAlgorithm {
 class ShellSort implements SortAlgorithm {
   @override
   List sort(List list) {
-    for (int gap = (list.length / 2).toInt(); gap > 0; gap = (gap / 2).toInt()) {
+    for (int gap = (list.length / 2).toInt();
+        gap > 0;
+        gap = (gap / 2).toInt()) {
       for (int i = gap; i < list.length; i++) {
         int temp = list[i];
         int j = i;
-        while (j >= 0 && j-gap >=0 && temp < list[j - gap]) {
+        while (j >= 0 && j - gap >= 0 && temp < list[j - gap]) {
           list[j] = list[j - gap];
-          print(list.toString());
           j -= gap;
         }
         if (j != i) {
@@ -135,10 +136,45 @@ class ShellSort implements SortAlgorithm {
 class MergeSort implements SortAlgorithm {
   @override
   List sort(List list) {
-    for(int i=0;i<list.length;i++){
-
-    }
+    List result = new List(list.length);
+    _sort(list, 0, list.length - 1, result);
     return list;
+  }
+
+  _sort(List list, int left, int right, List result) {
+    if (left < right) {
+      int mid = ((left + right) / 2).toInt();
+      _sort(list, left, mid, result); //左边归并排序
+      _sort(list, mid + 1, right, result); //右边归并排序
+      _merge(list, left, mid, right, result); //将左右合并
+    }
+  }
+
+  _merge(List list, int left, int mid, int right, List result) {
+    int i = left; //做序列指针
+    int j = mid + 1; //右序列指针
+    int t = 0; //临时数组指针
+
+    while (i <= mid && j <= right) {
+      if (list[i] <= list[j]) {
+        result[t++] = list[i++];
+      } else {
+        result[t++] = list[j++];
+      }
+    }
+
+    while (i <= mid) {
+      result[t++] = list[i++];
+    }
+
+    while (j <= right) {
+      result[t++] = list[j++];
+    }
+
+    t = 0;
+    while (left <= right) {
+      list[left++] = result[t++];
+    }
   }
 }
 
