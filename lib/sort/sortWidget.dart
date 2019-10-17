@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 
 abstract class SortAlgorithm {
   List sort(List list);
@@ -180,8 +180,36 @@ class MergeSort implements SortAlgorithm {
 
 class QuickSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    _quick(list, 0, list.length - 1);
+    return list;
+  }
+
+  _quick(List list, int left, int right) {
+    if (left < right) {
+      int pivot = list[left];
+      int i = left;
+      int j = right;
+
+      while (i < j) {
+        if (list[j] >= pivot) {
+          j--;
+          continue;
+        }
+        if (list[i] <= pivot) {
+          i++;
+          continue;
+        }
+        int temp = list[i];
+        list[i] = list[j];
+        list[j] = temp;
+      }
+
+      list[left] = list[i];
+      list[i] = pivot;
+      _quick(list, left, i - 1);
+      _quick(list, i + 1, right);
+    }
   }
 }
 

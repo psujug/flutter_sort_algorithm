@@ -4,7 +4,7 @@
     {"name": "插入排序","type": "insertion", "sortData": [5,4,2,1,8,3,19,7]},
     {"name": "希尔排序","type": "shell", "sortData": [8,4,2,7,5,3,19,1]},
     {"name": "归并排序","type": "merge", "sortData": [5,4,2,1,8,3,19,7]},
-    {"name": "快速排序","type": "quick", "sortData": [5,4,2,1,8,3,19,7]},
+    {"name": "快速排序","type": "quick", "sortData": [5,4,2,5,8,3,19,5,5]},
     {"name": "堆排序","type": "heap", "sortData": [5,4,2,1,8,3,19,7]},
     {"name": "计数排序","type": "counting", "sortData": [5,4,2,1,8,3,19,7]},
     {"name": "桶排序","type": "bucket", "sortData": [5,4,2,1,8,3,19,7]},
