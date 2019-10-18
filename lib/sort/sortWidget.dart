@@ -1,5 +1,3 @@
-
-
 abstract class SortAlgorithm {
   List sort(List list);
 
@@ -178,6 +176,9 @@ class MergeSort implements SortAlgorithm {
   }
 }
 
+/**
+ * 快速排序
+ */
 class QuickSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -213,17 +214,52 @@ class QuickSort implements SortAlgorithm {
   }
 }
 
+/**
+ * 堆排序
+ */
 class HeapSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    print("====="+(list.length / 2 - 1).toInt().toString());
+    for (int i = (list.length / 2 - 1).toInt(); i >= 0; i--) {
+      _heap(list, i, list.length);
+    }
+
+    for (int j = list.length - 1; j >= 0; j--) {
+      int temp = list[j];
+      list[j] = list[0];
+      list[0] = temp;
+      _heap(list, 0, j);
+    }
+
+    print(list.toString());
+    return list;
+  }
+
+  /**
+   * 大顶堆
+   */
+  _heap(List list, int i, int len) {
+    int temp = list[i];
+    for (int j = i * 2 + 1; j < len; j = 2 * j + 1) {
+      if (j + 1 < len && list[j] < list[j + 1]) {
+        j++;
+      }
+      if (list[j] > temp) {
+        list[i] = list[j];
+        i = j;
+      }else{
+        break;
+      }
+    }
+    list[i] = temp;
   }
 }
 
 class CountingSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    return list;
   }
 }
 
