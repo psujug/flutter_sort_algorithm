@@ -220,7 +220,6 @@ class QuickSort implements SortAlgorithm {
 class HeapSort implements SortAlgorithm {
   @override
   List sort(List list) {
-    print("====="+(list.length / 2 - 1).toInt().toString());
     for (int i = (list.length / 2 - 1).toInt(); i >= 0; i--) {
       _heap(list, i, list.length);
     }
@@ -232,7 +231,6 @@ class HeapSort implements SortAlgorithm {
       _heap(list, 0, j);
     }
 
-    print(list.toString());
     return list;
   }
 
@@ -248,7 +246,7 @@ class HeapSort implements SortAlgorithm {
       if (list[j] > temp) {
         list[i] = list[j];
         i = j;
-      }else{
+      } else {
         break;
       }
     }
@@ -259,20 +257,48 @@ class HeapSort implements SortAlgorithm {
 class CountingSort implements SortAlgorithm {
   @override
   List sort(List list) {
+    int max = list[0];
+    int min = list[0];
+    for (int i = 1; i < list.length; i++) {
+      if (list[i] > max) {
+        max = list[i];
+      } else if (list[i] < min) {
+        min = list[i];
+      }
+    }
+    List<int> result = List(max - min + 1);
+    for (int i = 0; i < list.length; i++) {
+      if (result[list[i] - min] == null) {
+        result[list[i] - min] = 1;
+      } else {
+        result[list[i] - min] = result[list[i] - min] + 1;
+      }
+    }
+    int k = 0;
+    for (int i = 0; i < result.length; i++) {
+      int j = result[i] == null ? 0 : result[i];
+      while (j > 0) {
+        list[k] = i + min;
+        j--;
+      }
+      k += result[i] == null ? 0 : result[i];
+    }
+
     return list;
   }
 }
 
 class BucketSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+
+    return list;
   }
 }
 
 class RadixSort implements SortAlgorithm {
   @override
-  List sort(List) {
-    return null;
+  List sort(List list) {
+    return list;
   }
 }
