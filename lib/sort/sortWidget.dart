@@ -39,9 +39,8 @@ abstract class SortAlgorithm {
   }
 }
 
-/**
- * 冒泡排序
- */
+
+//冒泡排序
 class BubbleSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -58,9 +57,7 @@ class BubbleSort implements SortAlgorithm {
   }
 }
 
-/**
- * 选择排序
- */
+//选择排序
 class SelectionSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -81,9 +78,7 @@ class SelectionSort implements SortAlgorithm {
   }
 }
 
-/**
- * 插入排序
- */
+//插入排序
 class InsertionSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -102,15 +97,13 @@ class InsertionSort implements SortAlgorithm {
   }
 }
 
-/**
- * 希尔排序 先分组再执行插入排序
- */
+//希尔排序 先分组再执行插入排序
 class ShellSort implements SortAlgorithm {
   @override
   List sort(List list) {
-    for (int gap = (list.length / 2).toInt();
+    for (int gap = (list.length ~/ 2);
         gap > 0;
-        gap = (gap / 2).toInt()) {
+        gap = (gap ~/ 2)) {
       for (int i = gap; i < list.length; i++) {
         int temp = list[i];
         int j = i;
@@ -128,9 +121,7 @@ class ShellSort implements SortAlgorithm {
   }
 }
 
-/**
- * 归并排序
- */
+//归并排序
 class MergeSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -141,7 +132,7 @@ class MergeSort implements SortAlgorithm {
 
   _sort(List list, int left, int right, List result) {
     if (left < right) {
-      int mid = ((left + right) / 2).toInt();
+      int mid = (left + right) ~/ 2;
       _sort(list, left, mid, result); //左边归并排序
       _sort(list, mid + 1, right, result); //右边归并排序
       _merge(list, left, mid, right, result); //将左右合并
@@ -176,9 +167,7 @@ class MergeSort implements SortAlgorithm {
   }
 }
 
-/**
- * 快速排序
- */
+//快速排序
 class QuickSort implements SortAlgorithm {
   @override
   List sort(List list) {
@@ -214,13 +203,12 @@ class QuickSort implements SortAlgorithm {
   }
 }
 
-/**
- * 堆排序
- */
+
+//堆排序
 class HeapSort implements SortAlgorithm {
   @override
   List sort(List list) {
-    for (int i = (list.length / 2 - 1).toInt(); i >= 0; i--) {
+    for (int i = list.length ~/ 2 - 1; i >= 0; i--) {
       _heap(list, i, list.length);
     }
 
@@ -234,9 +222,7 @@ class HeapSort implements SortAlgorithm {
     return list;
   }
 
-  /**
-   * 大顶堆
-   */
+  //大顶堆
   _heap(List list, int i, int len) {
     int temp = list[i];
     for (int j = i * 2 + 1; j < len; j = 2 * j + 1) {
@@ -291,14 +277,70 @@ class CountingSort implements SortAlgorithm {
 class BucketSort implements SortAlgorithm {
   @override
   List sort(List list) {
-
     return list;
   }
 }
 
+//基数排序
 class RadixSort implements SortAlgorithm {
   @override
   List sort(List list) {
+    int maxValueLenght = _getMaxValueLenght(list);
+    _radix(list, maxValueLenght);
     return list;
+  }
+
+  //maxValueLenght 最大数的位数
+  _radix(List list, int maxValueLenght) {
+    int mod = 10;
+    int dev = 1;
+
+    for (int i = 0; i < maxValueLenght; i++, dev *= 10, mod *= 10) {
+      List<List> counter = List<List>(mod * 2); // 乘2是为了防止负数的出现
+      for (int j = 0; j < list.length; j++) {
+        int bucket = ((list[j] % mod) ~/ dev) + mod;
+        counter[bucket] = _arrayAppend(counter[bucket], list[j]);
+      }
+
+      int pos = 0;
+      for (int k = 0; k < counter.length; k++) {
+        if(counter[k] == null){
+          counter[k] = List();
+        }
+        for (int l = 0; l < counter[k].length; l++) {
+          list[pos++] = counter[k][l];
+        }
+      }
+    }
+  }
+
+  List _arrayAppend(List l, int value) {
+    print(l.toString());
+    if(l == null){
+      l = new List();
+    }
+    l.add(value);
+    return l;
+  }
+
+  _getMaxValueLenght(List list) {
+    int maxValue = 0;
+    for (int i = 0; i < list.length; i++) {
+      if (maxValue < list[i]) {
+        maxValue = list[i];
+      }
+    }
+    return _getNumLenght(maxValue);
+  }
+
+  _getNumLenght(int num) {
+    if (num == 0) {
+      return 1;
+    }
+    int lenght = 0;
+    for (int i = num; i != 0; i = i ~/ 10) {
+      lenght++;
+    }
+    return lenght;
   }
 }
