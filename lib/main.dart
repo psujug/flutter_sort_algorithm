@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sort_algorithm/leetcode/leetHomePage.dart';
+import 'package:flutter_sort_algorithm/sort/sortHomePage.dart';
 import 'homePage.dart';
+import 'leetcode/zChange.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +25,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: '排序算法'),
+      routes: <String, WidgetBuilder>{
+        "/leet": (_) => LeetHomePage("Leet Code"),
+        "/sort": (_) => SortHomePage("排序算法"),
+      },
+      onGenerateRoute: _getRoute,
     );
   }
-}
 
+  Route<dynamic> _getRoute(RouteSettings settings) {
+    Map<String, String> argument = settings.arguments;
+    switch (settings.name) {
+      case "/zChange":
+        return MaterialPageRoute(
+          settings:settings,
+          builder: (_)=>ZChange(argument["title"])
+        );
+    }
+  }
+}

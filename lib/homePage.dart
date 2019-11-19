@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomeListPage extends State<MyHomePage> {
-  List<String> _namess = ["排序"];
+  List<String> _namess = ["排序","Leetcode"];
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,24 @@ class _MyHomeListPage extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView(children: _childListItem()),
+      body: ListView.builder(
+        itemBuilder: _listItem,
+        itemCount: _namess.length,
+      ),
     );
+  }
+
+  Widget _listItem(BuildContext context, int index) {
+    return Column(children: [
+      ListTile(
+          title: Text(_namess[index]),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () => _clickItem(index)),
+      Divider(
+        height: 1.0,
+        color: Colors.grey,
+      )
+    ]);
   }
 
   List<Widget> _childListItem() {
@@ -57,10 +73,15 @@ class _MyHomeListPage extends State<MyHomePage> {
 
   void _clickItem(int index) {
     Fluttertoast.showToast(msg: _namess[index]);
-    Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
-        (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-      return SortHomePage(title: _namess[index]);
-    }));
+//    Navigator.of(context).push(new PageRouteBuilder(pageBuilder:
+//        (BuildContext context, Animation<double> animation,
+//            Animation<double> secondaryAnimation) {
+//      return SortHomePage(title: _namess[index]);
+//    }));
+    if(index == 0){
+      Navigator.of(context).pushNamed("/sort");
+    }else if(index == 1){
+      Navigator.of(context).pushNamed("/leet");
+    }
   }
 }

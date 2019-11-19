@@ -77,3 +77,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - static/file/load_sort_category.json
+    - static/file/load_leetcode_programming.json

@@ -9,6 +9,8 @@ class SortPage extends StatefulWidget {
   _SortPageState createState() => _SortPageState();
 
   final ItemData data;
+
+  SortPage.temp(this.data);
 }
 
 class _SortPageState extends State<SortPage> {

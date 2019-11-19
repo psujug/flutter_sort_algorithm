@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_sort_algorithm/model/item_data.dart';
 
 class SortHomePage extends StatefulWidget {
-  SortHomePage({Key key, this.title}) : super(key: key);
+//  SortHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,6 +19,7 @@ class SortHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  const SortHomePage(this.title);
 
   @override
   _HomeListPage createState() => _HomeListPage();
